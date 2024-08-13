@@ -11,4 +11,4 @@ class CoreModule(Module):
         description = "Core Module of Tassistant"
 
     def __init__(self, base_path):
-        super().init(base_path)
+        super().__init__(base_path)

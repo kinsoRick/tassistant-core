@@ -33,6 +33,6 @@ clear_history_handler = MessageHandler(
     & filters.me
 )
 
-tools_handlers = [
+all_handlers = [
     clear_history_handler,
 ]
