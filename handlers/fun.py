@@ -11,10 +11,10 @@ from pyrogram.handlers import MessageHandler
 from pyrogram import filters, Client
 
 from tassistant.helpers import I18n
+from tassistant.loader import ModuleLoader
 
 _ = I18n('ru')
 logger = getLogger(__name__)
-
 
 async def percent_messages(client: Client, message: Message):
     chat = message.chat.id
@@ -44,7 +44,7 @@ async def percent_messages(client: Client, message: Message):
 
 percent_messages_handler = MessageHandler(
     percent_messages,
-    filters.command("процент", prefixes="/")
+    filters.command("процент", prefixes=ModuleLoader().get_command_prefix())
     & filters.me
 )
 
@@ -55,7 +55,7 @@ async def typing(client: Client, message: Message):
 
     if len(args) < 1:
         await message.edit(_.get_and_set("INVALID_COMMAND_TYPING", {
-            "prefix": "/",
+            "prefix": ModuleLoader().command_prefix,
             "command": command
         }))
         await asyncio.sleep(10)
@@ -85,7 +85,7 @@ async def typing(client: Client, message: Message):
 
 typing_handler = MessageHandler(
     typing,
-    filters.command("напечатать", prefixes="/")
+    filters.command("напечатать", prefixes=ModuleLoader().command_prefix)
     & filters.me
 )
 
@@ -133,7 +133,7 @@ async def common_bad_words(client: Client, message: Message):
 
 common_bad_words_history = MessageHandler(
     common_bad_words,
-    filters.command("мат", prefixes="/")
+    filters.command("мат", prefixes=ModuleLoader().command_prefix)
     & filters.me
 )
 

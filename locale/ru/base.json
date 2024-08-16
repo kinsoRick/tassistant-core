@@ -1,0 +1,3 @@
+{
+    "INVALID_COMMAND_MODULE_DOWNLOAD": "Ошибка: Неправильное использование команды\n%prefix%%command% <Ссылка на репозиторий>"
+}
