@@ -13,7 +13,7 @@ from pyrogram import filters, Client
 from tassistant_bot.helpers import I18n
 from tassistant_bot.loader import ModuleLoader
 
-_ = I18n('ru')
+_ = I18n('ru').get
 logger = getLogger(__name__)
 
 async def percent_messages(client: Client, message: Message):
@@ -29,14 +29,14 @@ async def percent_messages(client: Client, message: Message):
             people[msg.from_user.username] += 1
 
     msg_rows = [
-        _.get_and_set("MESSAGES_PERCENT_CHAT", {
+        _("MESSAGES_PERCENT_CHAT", {
             "user": user,
             "percent": f"{float(count / messages_count * 100):.2f}"
         }) for user, count in people.items()
     ]
 
     msg_rows.append(
-        f"\n{_.get_and_set('MESSAGES_TOTAL', {'count': str(messages_count)})}"
+        f"\n{_('MESSAGES_TOTAL', {'count': str(messages_count)})}"
     )
 
     await client.send_message(chat, "\n".join(msg_rows), disable_notification=True)
@@ -54,7 +54,7 @@ async def typing(client: Client, message: Message):
     args = message.command[1:]
 
     if len(args) < 1:
-        await message.edit(_.get_and_set("INVALID_COMMAND_TYPING", {
+        await message.edit(_("INVALID_COMMAND_TYPING", {
             "prefix": ModuleLoader().command_prefix,
             "command": command
         }))
