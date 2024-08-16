@@ -10,8 +10,8 @@ from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.handlers import MessageHandler
 from pyrogram import filters, Client
 
-from tassistant.helpers import I18n
-from tassistant.loader import ModuleLoader
+from tassistant_bot.helpers import I18n
+from tassistant_bot.loader import ModuleLoader
 
 _ = I18n('ru')
 logger = getLogger(__name__)

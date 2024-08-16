@@ -1,6 +1,6 @@
 from logging import getLogger
 
-from tassistant.loader import Module
+from tassistant_bot.loader import Module
 
 logger = getLogger(__name__)
 

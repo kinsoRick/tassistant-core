@@ -3,8 +3,8 @@ from pyrogram.types import Message
 from pyrogram import Client, filters
 from pyrogram.handlers import MessageHandler
 
-from tassistant.helpers import I18n
-from tassistant.loader import ModuleLoader
+from tassistant_bot.helpers import I18n
+from tassistant_bot.loader import ModuleLoader
 
 _ = I18n()
 logger = getLogger(__name__)
