@@ -16,7 +16,7 @@ class CoreModule(Module):
     def __init__(self, base_path):
         super().__init__(base_path)
 
-    def client_ready(self, client: Client) -> None:
+    async def client_ready(self, client: Client) -> None:
         logger.debug(f"| {self.Meta.name} | overriding client ready")
-        super().client_ready(client)
-        client.send_message("me", _("tassistant-core:WELCOME_MESSAGE"))
+        await super().client_ready(client)
+        await client.send_message("me", _("tassistant-core:WELCOME_MESSAGE"))
