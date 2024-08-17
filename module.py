@@ -19,4 +19,4 @@ class CoreModule(Module):
     def client_ready(self, client: Client) -> None:
         logger.debug(f"| {self.Meta.name} | overriding client ready")
         super().client_ready(client)
-        client.send_message(client.me.id, _("tassistant-core:WELCOME_MESSAGE"))
+        client.send_message("me", _("tassistant-core:WELCOME_MESSAGE"))
