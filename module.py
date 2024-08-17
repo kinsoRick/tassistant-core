@@ -1,8 +1,10 @@
-from logging import getLogger
-
 from tassistant_bot.loader import Module
+from tassistant_bot.helpers import I18n
+from logging import getLogger
+from pyrogram import Client
 
 logger = getLogger(__name__)
+_ = I18n().get
 
 
 class CoreModule(Module):
@@ -13,3 +15,8 @@ class CoreModule(Module):
 
     def __init__(self, base_path):
         super().__init__(base_path)
+
+    def client_ready(self, client: Client) -> None:
+        logger.debug(f"| {self.Meta.name} | overriding client ready")
+        super().client_ready(client)
+        client.send_message(client.me.id, _("tassistant-core:WELCOME_MESSAGE"))

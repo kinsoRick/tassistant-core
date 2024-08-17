@@ -1,0 +1,5 @@
+Ваш Telegram Assistant (TAssistant) активирован.
+
+TAssistant поставляется с модулем tassistant-core.
+Чтобы ознакомиться с командами модуля tassistant-core.
+Воспользуйтесь командой `.помощь tassistant-core`

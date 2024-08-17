@@ -17,7 +17,7 @@ async def clear_history(client: Client, message: Message):
     args = message.command[1:]
 
     if len(args) < 1:
-        return await message.edit(_("invalid_command_clear", {
+        return await message.edit(_("tassistant-core:invalid_command_clear", {
             "prefix": ModuleLoader().command_prefix,
             "command": f"{command}"
         }))
@@ -42,7 +42,7 @@ async def get_help_module(client: Client, message: Message):
     try:
         module = message.command[1]
     except IndexError:
-        return await message.edit(_("invalid_command_get_help_module", {
+        return await message.edit(_("tassistant-core:invalid_command_get_help_module", {
             "prefix": ModuleLoader().command_prefix,
             "command": f"{command}"
         }))

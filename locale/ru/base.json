@@ -1,3 +1,9 @@
 {
-    "INVALID_COMMAND_MODULE_DOWNLOAD": "Ошибка: Неправильное использование команды\n%prefix%%command% <Ссылка на репозиторий>"
+    "INVALID_COMMAND_MODULE_DOWNLOAD": "Ошибка: Неправильное использование команды\n%prefix%%command% <Ссылка на репозиторий>",
+    "MESSAGES_PERCENT_CHAT": "%user% - %percent%% сообщений в чате",
+    "MESSAGES_TOTAL": "%count% сообщений суммарно",
+    "NOT_IMPLEMENTED": "Данный функционал недоступен, скорее всего вы используете не стабильную версию Tassistant",
+    "ERROR_ENCOUNTERED": "Произошла ошибка, мы о ней уже знаем и пытаемся исправить как можно быстрее",
+    "MODULE_DOWNLOAD_ERROR": "При скачивании %repo_name% модуля возникли ошибки",
+    "SEARCH_CURSE_WORDS": "Ищем мат..."
 }

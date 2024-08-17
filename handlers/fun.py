@@ -16,6 +16,7 @@ from tassistant_bot.loader import ModuleLoader
 _ = I18n('ru').get
 logger = getLogger(__name__)
 
+
 async def percent_messages(client: Client, message: Message):
     chat = message.chat.id
     people = Counter()
@@ -29,14 +30,14 @@ async def percent_messages(client: Client, message: Message):
             people[msg.from_user.username] += 1
 
     msg_rows = [
-        _("MESSAGES_PERCENT_CHAT", {
+        _("tassistant-core:MESSAGES_PERCENT_CHAT", {
             "user": user,
             "percent": f"{float(count / messages_count * 100):.2f}"
         }) for user, count in people.items()
     ]
 
     msg_rows.append(
-        f"\n{_('MESSAGES_TOTAL', {'count': str(messages_count)})}"
+        f"\n{_('tassistant-core:MESSAGES_TOTAL', {'count': str(messages_count)})}"
     )
 
     await client.send_message(chat, "\n".join(msg_rows), disable_notification=True)
@@ -54,7 +55,7 @@ async def typing(client: Client, message: Message):
     args = message.command[1:]
 
     if len(args) < 1:
-        await message.edit(_("INVALID_COMMAND_TYPING", {
+        await message.edit(_("tassistant-core:INVALID_COMMAND_TYPING", {
             "prefix": ModuleLoader().command_prefix,
             "command": command
         }))
@@ -103,6 +104,8 @@ async def common_bad_words(client: Client, message: Message):
                 "ое]ху[яйиеё]|хуйн).*?|(?:о[тб]?|про|на|вы)?м(?:анд(?:[ауеыи](?:л(?:и[сзщ])?[ауеиы])?|ой|[ао]в.*?|юк("
                 "?:ов|[ауи])?|е[нт]ь|ища)|уд(?:[яаиое].+?|е?н(?:[ьюия]|ей))|[ао]л[ао]ф[ьъ](?:[яиюе]|[еёо]й))|елд["
                 "ауые].*?|ля[тд]ь|(?:[нз]а|по)х)(?![а-яё])")
+
+    await message.edit(_("SEARCH_CURSE_WORDS"))
 
     async for old_message in client.get_chat_history(message.chat.id):
         try:

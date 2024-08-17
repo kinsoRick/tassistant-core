@@ -27,7 +27,7 @@ async def download_module_repo(client: Client, message: Message):
     try:
         loader.download_module(repo_url, repo_name)
     except Exception as e:
-        return await message.edit(_("MODULE_DOWNLOAD_ERROR", {
+        return await message.edit(_("tassistant-core:MODULE_DOWNLOAD_ERROR", {
             "repo_name": repo_name,
         }))
 
