@@ -7,12 +7,11 @@ from tassistant_bot.helpers import I18n
 from tassistant_bot.loader import ModuleLoader
 
 _ = I18n().create_module_get("tassistant-core")
+get_i18n = I18n().get
 logger = getLogger(__name__)
 
 
-# Реализуем асинхронный каллбек
 async def clear_history(client: Client, message: Message):
-    # Получаем команды и аргументы
     command = message.command[0]
     args = message.command[1:]
 
@@ -29,7 +28,6 @@ async def clear_history(client: Client, message: Message):
 
     await client.delete_messages(message.chat.id, messages, revoke=True)
 
-# реализуем хэндлер
 clear_history_handler = MessageHandler(
     clear_history,
     filters.command("почистить", prefixes=ModuleLoader().command_prefix)
@@ -42,12 +40,12 @@ async def get_help_module(client: Client, message: Message):
     try:
         module = message.command[1]
     except IndexError:
-        return await message.edit(_("invalid_command_get_help_module", {
+        return await message.edit(get_i18n("invalid_command_get_help_module", {
             "prefix": ModuleLoader().command_prefix,
             "command": f"{command}"
         }))
 
-    await message.edit(_(f"{module}:help_module", {
+    await message.edit(get_i18n(f"{module}:help_module", {
         "prefix": ModuleLoader().command_prefix,
     }))
 
