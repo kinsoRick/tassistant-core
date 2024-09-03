@@ -4,7 +4,7 @@ from logging import getLogger
 from pyrogram import Client
 
 logger = getLogger(__name__)
-_ = I18n().get
+_ = I18n().create_module_get("tassistant-core")
 
 
 class CoreModule(Module):
@@ -19,4 +19,4 @@ class CoreModule(Module):
     async def client_ready(self, client: Client) -> None:
         logger.debug(f"| {self.Meta.name} | overriding client ready")
         await super().client_ready(client)
-        await client.send_message("me", _("tassistant-core:WELCOME_MESSAGE"))
+        await client.send_message("me", _("WELCOME_MESSAGE"))

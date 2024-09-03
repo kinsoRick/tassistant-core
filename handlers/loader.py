@@ -7,14 +7,14 @@ from tassistant_bot.helpers import I18n
 from tassistant_bot.loader import extract_repo_name, ModuleLoader
 
 
-_ = I18n('ru').get
+_ = I18n('ru').create_module_get("tassistant-core")
 
 
 async def download_module_repo(client: Client, message: Message):
     loader = ModuleLoader()
     if len(message.command) < 2:
         await message.edit(
-            _("tassistant-core:INVALID_COMMAND_MODULE_DOWNLOAD", {
+            _("INVALID_COMMAND_MODULE_DOWNLOAD", {
                 "prefix": loader.command_prefix,
                 "command": message.command[0],
             })
@@ -27,7 +27,7 @@ async def download_module_repo(client: Client, message: Message):
     try:
         loader.download_module(repo_url, repo_name)
     except Exception as e:
-        return await message.edit(_("tassistant-core:MODULE_DOWNLOAD_ERROR", {
+        return await message.edit(_("MODULE_DOWNLOAD_ERROR", {
             "repo_name": repo_name,
         }))
 
