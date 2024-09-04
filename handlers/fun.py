@@ -51,6 +51,7 @@ percent_messages_handler = MessageHandler(
 
 
 async def tts(client: Client, message: Message):
+    await message.delete()
     command = message.command[0]
     text = " ".join(message.command[1:])
 
@@ -60,7 +61,6 @@ async def tts(client: Client, message: Message):
         file.write(data)
 
     await client.send_voice(message.chat.id, "output.ogg")
-    await message.delete()
 
 tts_handler = MessageHandler(
     tts,
