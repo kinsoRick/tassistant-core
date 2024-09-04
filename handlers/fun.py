@@ -59,7 +59,7 @@ async def tts(client: Client, message: Message):
     with open('output.ogg', '+wb') as file:
         file.write(data)
 
-    await client.send_voice(message.chat.id, data)
+    await client.send_voice(message.chat.id, "output.ogg")
     await message.delete()
 
 tts_handler = MessageHandler(
