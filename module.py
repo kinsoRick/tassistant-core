@@ -1,7 +1,10 @@
+import sys
+
 from tassistant_bot.loader import Module
 from tassistant_bot.helpers import I18n
 from logging import getLogger
 from pyrogram import Client
+import subprocess
 
 logger = getLogger(__name__)
 _ = I18n().create_module_get("tassistant-core")
@@ -20,3 +23,6 @@ class CoreModule(Module):
         logger.debug(f"| {self.Meta.name} | overriding client ready")
         await super().client_ready(client)
         await client.send_message("me", _("WELCOME_MESSAGE"))
+
+        install_requirements = "apk update && apk install espeak ffmpeg libespeak1".split(" ")
+        subprocess.check_call(install_requirements)
