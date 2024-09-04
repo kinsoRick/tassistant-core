@@ -1,11 +1,11 @@
 import asyncio
 import re
-import pyttsx3
 
 from collections import Counter
 from time import sleep
 from logging import getLogger
 
+from pyt2s.services import stream_elements
 from pyrogram.types import Message
 from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.handlers import MessageHandler
@@ -16,8 +16,6 @@ from tassistant_bot.loader import ModuleLoader
 
 _ = I18n('ru').create_module_get("tassistant-core")
 logger = getLogger(__name__)
-engine = pyttsx3.init()
-
 
 async def percent_messages(client: Client, message: Message):
     chat = message.chat.id
@@ -56,9 +54,12 @@ async def tts(client: Client, message: Message):
     command = message.command[0]
     text = " ".join(message.command[1:])
 
-    engine.save_to_file(text, "output.ogg")
-    await message.reply_voice("output.ogg")
+    data = stream_elements.requestTTS(text, stream_elements.Voice.ru_RU_Wavenet_A.value)
 
+    with open('output.ogg', '+wb') as file:
+        file.write(data)
+
+    await message.reply_voice("output.ogg")
 
 tts_handler = MessageHandler(
     tts,

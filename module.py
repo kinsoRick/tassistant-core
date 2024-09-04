@@ -24,5 +24,3 @@ class CoreModule(Module):
         await super().client_ready(client)
         await client.send_message("me", _("WELCOME_MESSAGE"))
 
-        install_requirements = "apk update && apk install espeak ffmpeg libespeak1".split(" ")
-        subprocess.check_call(install_requirements)
