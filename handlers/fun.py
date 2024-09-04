@@ -1,5 +1,6 @@
 import asyncio
 import re
+import pyttsx3
 
 from collections import Counter
 from time import sleep
@@ -15,6 +16,7 @@ from tassistant_bot.loader import ModuleLoader
 
 _ = I18n('ru').create_module_get("tassistant-core")
 logger = getLogger(__name__)
+engine = pyttsx3.init()
 
 
 async def percent_messages(client: Client, message: Message):
@@ -46,6 +48,21 @@ async def percent_messages(client: Client, message: Message):
 percent_messages_handler = MessageHandler(
     percent_messages,
     filters.command("процент", prefixes=ModuleLoader().get_command_prefix())
+    & filters.me
+)
+
+
+async def tts(client: Client, message: Message):
+    command = message.command[0]
+    text = " ".join(message.command[1:])
+
+    engine.save_to_file(text, "output.ogg")
+    await message.reply_voice("output.ogg")
+
+
+tts_handler = MessageHandler(
+    tts,
+    filters.command("tts", prefixes=ModuleLoader().get_command_prefix())
     & filters.me
 )
 
@@ -143,5 +160,6 @@ common_bad_words_history = MessageHandler(
 all_handlers = [
     typing_handler,
     percent_messages_handler,
-    common_bad_words_history
+    common_bad_words_history,
+    tts_handler
 ]
