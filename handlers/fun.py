@@ -11,7 +11,7 @@ from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.handlers import MessageHandler
 from pyrogram import filters, Client
 
-from tassistant_bot.helpers import I18n
+from tassistant_bot.i18n import I18n
 from tassistant_bot.loader import ModuleLoader
 
 _ = I18n('ru').create_module_get("tassistant-core")

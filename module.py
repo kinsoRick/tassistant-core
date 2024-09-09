@@ -1,7 +1,7 @@
 import sys
 
 from tassistant_bot.loader import Module
-from tassistant_bot.helpers import I18n
+from tassistant_bot.i18n import I18n
 from logging import getLogger
 from pyrogram import Client
 import subprocess

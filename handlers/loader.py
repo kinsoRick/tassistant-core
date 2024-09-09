@@ -3,7 +3,7 @@ from pyrogram import Client, filters
 from pyrogram.handlers import MessageHandler
 from pyrogram.types import Message
 
-from tassistant_bot.helpers import I18n
+from tassistant_bot.i18n import I18n
 from tassistant_bot.loader import extract_repo_name, ModuleLoader
 
 
