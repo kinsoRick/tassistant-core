@@ -1,3 +1,5 @@
+import random
+
 import asyncio
 import re
 
@@ -69,7 +71,7 @@ async def eminem(client: Client, message: Message):
     for message in messages:
         try:
             await client.send_message(chat, message, disable_notification=True)
-            sleep(0.1)
+            sleep(random.random())
         except FloodWait as e:
             sleep(e.x)
         except MessageNotModified as e:
