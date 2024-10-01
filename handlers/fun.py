@@ -17,6 +17,7 @@ from tassistant_bot.loader import ModuleLoader
 _ = I18n('ru').create_module_get("tassistant-core")
 logger = getLogger(__name__)
 
+
 async def percent_messages(client: Client, message: Message):
     chat = message.chat.id
     people = Counter()
@@ -50,6 +51,38 @@ percent_messages_handler = MessageHandler(
 )
 
 
+async def eminem(client: Client, message: Message):
+    await message.delete()
+    chat = message.chat.id
+    messages = [
+        "Uh, summa-lumma, dooma-lumma,", "you assumin' I'm a human", "What I gotta do", "to get it through", "to you",
+        "I'm superhuman?", "Innovative", "and I'm made of rubber", "so that anything", "You say is ricochetin' off",
+        "of me", "and it'll glue", "to you", "and I'm devastating", "more than ever", "demonstrating", "How to give",
+        "a motherfuckin' audience",
+        "a feeling like", "it's levitating", "Never fading", "and I know", "the haters are", "forever waiting",
+        "For the day",
+        "that they can say", "I fell off", "they'll be celebrating", "'Cause I know the way to get", "'em motivated",
+        "I make elevating music",
+        "you make elevator music"
+    ]
+
+    for message in messages:
+        try:
+            await client.send_message(chat, message, disable_notification=True)
+            sleep(0.1)
+        except FloodWait as e:
+            sleep(e.x)
+        except MessageNotModified as e:
+            logger.warning(f"| Message not modified |")
+
+
+eminem_message_handler = MessageHandler(
+    eminem,
+    filters.command("эминем", prefixes=ModuleLoader().get_command_prefix())
+    & filters.me
+)
+
+
 async def tts(client: Client, message: Message):
     await message.delete()
     command = message.command[0]
@@ -61,6 +94,7 @@ async def tts(client: Client, message: Message):
         file.write(data)
 
     await client.send_voice(message.chat.id, "output.ogg")
+
 
 tts_handler = MessageHandler(
     tts,
