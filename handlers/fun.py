@@ -197,5 +197,6 @@ all_handlers = [
     typing_handler,
     percent_messages_handler,
     common_bad_words_history,
-    tts_handler
+    tts_handler,
+    eminem_message_handler
 ]
